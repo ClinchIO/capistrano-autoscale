@@ -12,7 +12,7 @@ module Capistrano
   end
 end
 
-def autoscale(groupname, *args)
+def autoscale(groupnames, *args)
   include Capistrano::DSL
   include Capistrano::Autoscale::Aws::AutoscalingGroup
   include Capistrano::Autoscale::Aws::EC2
