@@ -8,12 +8,8 @@ module Capistrano
         include Capistrano::Autoscale::Aws::Credentials
         include Capistrano::DSL
 
-        def autoscale
-          @autoscaling ||= ::Aws::AutoScaling::Client.new(credentials)
-        end
-
         def autoscale_groups
-          @autoscale_groups ||= autoscale.describe_auto_scaling_groups({auto_scaling_group_names: [autoscale_group_names].flatten}).auto_scaling_groups
+          @autoscale_groups ||= ::Aws::AutoScaling::Client.new(credentials).describe_auto_scaling_groups({auto_scaling_group_names: [autoscale_group_names].flatten}).auto_scaling_groups
         end
 
         def autoscale_group_names
