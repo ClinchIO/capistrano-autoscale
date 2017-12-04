@@ -12,12 +12,12 @@ module Capistrano
           @autoscaling ||= ::Aws::AutoScaling::Client.new(credentials)
         end
 
-        def autoscale_group
-          @autoscale_group ||= autoscale.describe_auto_scaling_groups({auto_scaling_group_names: [autoscale_group_name]}).auto_scaling_groups.first
+        def autoscale_groups
+          @autoscale_groups ||= autoscale.describe_auto_scaling_groups({auto_scaling_group_names: [autoscale_group_names].flatten}).auto_scaling_groups
         end
 
-        def autoscale_group_name
-          fetch(:aws_autoscale_group)
+        def autoscale_group_names
+          fetch(:aws_autoscale_groups)
         end
 
       end

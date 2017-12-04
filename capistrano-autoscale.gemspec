@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.name          = "capistrano-autoscale"
   spec.version       = Capistrano::Autoscale::VERSION
   spec.authors       = ["Damien Glancy"]
-  spec.email         = ["support@clinch.io"]
+  spec.email         = ["support@clinchtalent.com"]
 
   spec.summary       = %q{Capistrano plugin for deploying to AWS AutoScale groups.}
   spec.description   = %q{Deploys to all instances in a AWS AutoScale group.}

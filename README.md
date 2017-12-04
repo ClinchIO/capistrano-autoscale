@@ -26,5 +26,5 @@ set :aws_region,            ENV['AWS_REGION']
 And set the autoscale group:
 
 ```
-autoscale '<auto-scale-group-name>', user: '<deployment user>', roles: [<array of cap roles>]
+autoscale [<array of auto-scale-group-names>], user: '<deployment user>', roles: [<array of cap roles>]
 ```

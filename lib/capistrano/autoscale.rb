@@ -17,11 +17,16 @@ def autoscale(groupname, *args)
   include Capistrano::Autoscale::Aws::AutoscalingGroup
   include Capistrano::Autoscale::Aws::EC2
 
-  set :aws_autoscale_group, groupname
+  set :aws_autoscale_groups, groupnames
 
-  if autoscale_group
-    instances = autoscale_group.instances.select do |instance|
-      instance.lifecycle_state == 'InService'
+  if autoscale_groups
+    instances = []
+    
+    autoscale_groups.each do |autoscale_group|
+      group_instances = autoscale_group.instances.select do |instance|
+        instance.lifecycle_state == 'InService'
+      end
+      instances += group_instances
     end
 
     instances.each do |instance|
@@ -30,6 +35,6 @@ def autoscale(groupname, *args)
       server(hostname, *args)
     end
   else
-    p "Error: No #{groupname} autoscale group found."
+    p "Error: No #{groupnames} autoscale group found."
   end
 end
