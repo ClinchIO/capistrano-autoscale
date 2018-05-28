@@ -1,4 +1,4 @@
-require 'aws-sdk'
+require 'aws-sdk-autoscaling'
 require 'capistrano/autoscale/aws/credentials'
 
 module Capistrano

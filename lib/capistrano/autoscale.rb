@@ -1,4 +1,4 @@
-require 'aws-sdk'
+require 'aws-sdk-core'
 
 require 'capistrano/all'
 require 'capistrano/dsl'
