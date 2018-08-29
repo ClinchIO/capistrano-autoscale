@@ -1,5 +1,5 @@
 require 'aws-sdk-ec2'
-require 'capistrano/autoscale/aws/credentials'
+require 'capistrano/autoscale/aws/autoscaling_credentials'
 
 module Capistrano
   module Autoscale
