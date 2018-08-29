@@ -5,10 +5,10 @@ module Capistrano
   module Autoscale
     module Aws
       module EC2
-        include Capistrano::Autoscale::Aws::Credentials
+        include Capistrano::Autoscale::Aws::AutoscalingCredentials
 
         def ec2_client
-          @ec2_client ||= ::Aws::EC2::Client.new(credentials)
+          @ec2_client ||= ::Aws::EC2::Client.new(autoscaling_credentials)
         end
 
         def ec2_instance(instance_id)
