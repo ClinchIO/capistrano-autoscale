@@ -30,8 +30,7 @@ def autoscale(groupnames, identifier_type, *args)
     end
 
     instances.each do |instance|
-      # host = host_by_identifier(instance.instance_id, identifier_type)
-      host = identifier_type == :ip_address ? ec2_instance(instance.instance_id).private_ip_address : instance.instance_id
+      host = host_by_identifier(instance, identifier_type)
       p "Autoscale deploying to: #{host}"
       server(host, *args)
     end
@@ -43,6 +42,5 @@ end
 private
 
 def host_by_identifier(instance, identifier_type)
-  ec2_attribute = identifier_type == :ip_address ? :private_ip_address : :instance_id
-  instance.send(ec2_attribute)
+  identifier_type == :ip_address ? ec2_instance(instance.instance_id).private_ip_address : instance.instance_id
 end
