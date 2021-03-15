@@ -12,7 +12,7 @@ module Capistrano
   end
 end
 
-def autoscale(groupnames, *args)
+def autoscale(groupnames, identifier_type, *args)
   include Capistrano::DSL
   include Capistrano::Autoscale::Aws::AutoscalingGroup
   include Capistrano::Autoscale::Aws::EC2
@@ -30,11 +30,17 @@ def autoscale(groupnames, *args)
     end
 
     instances.each do |instance|
-      hostname = ec2_instance(instance.instance_id).private_ip_address
-      p "Autoscale deploying to: #{hostname}"
-      server(hostname, *args)
+      host = host_by_identifier(instance, identifier_type)
+      p "Autoscale deploying to: #{host}"
+      server(host, *args)
     end
   else
     p "Error: No #{groupnames} autoscale group found."
   end
+end
+
+private
+
+def host_by_identifier(instance, identifier_type)
+  identifier_type == :ip_address ? ec2_instance(instance.instance_id).private_ip_address : instance.instance_id
 end
