@@ -23,8 +23,14 @@ set :aws_secret_access_key, ENV['AWS_SECRET_ACCESS_KEY']
 set :aws_region,            ENV['AWS_REGION']
 ```
 
-And set the autoscale group:
+And set the autoscale group using IP Address:
 
 ```
-autoscale [<array of auto-scale-group-names>], user: '<deployment user>', roles: [<array of cap roles>]
+autoscale [<array of auto-scale-group-names>], :ip_address, user: '<deployment user>', roles: [<array of cap roles>]
+```
+
+Or, set the autoscale group using EC2 Instance Id:
+
+```
+autoscale [<array of auto-scale-group-names>], :instance_id, user: '<deployment user>', roles: [<array of cap roles>]
 ```
