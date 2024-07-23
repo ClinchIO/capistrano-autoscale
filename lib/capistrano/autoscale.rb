@@ -20,19 +20,17 @@ def autoscale(groupnames, identifier_type, *args)
   set :aws_autoscale_groups, groupnames
 
   if autoscale_groups
-    instances = []
-    
     autoscale_groups.each do |autoscale_group|
       group_instances = autoscale_group.instances.select do |instance|
         instance.lifecycle_state == 'InService'
       end
-      instances += group_instances
-    end
 
-    instances.each do |instance|
-      host = host_by_identifier(instance, identifier_type)
-      p "Autoscale deploying to: #{host}"
-      server(host, *args)
+      group_instances.each_with_index do |instance, index|
+        host = host_by_identifier(instance, identifier_type)
+        p "Autoscale group \"#{autoscale_group.auto_scaling_group_name}\" deploying to: #{host}"
+        args << {primary: true} if index == 0
+        server(host, *args)
+      end
     end
   else
     p "Error: No #{groupnames} autoscale group found."
