@@ -15,11 +15,12 @@ Add this statement to your Capfile:
 
 ## Configuration
 
-Below are the Capistrano configuration options with their defaults:
+Below are the Capistrano configuration options with their defaults (session_token is optional):
 
 ```
 set :aws_access_key_id,     ENV['AWS_ACCESS_KEY_ID']
 set :aws_secret_access_key, ENV['AWS_SECRET_ACCESS_KEY']
+set :aws_session_token,     ENV['AWS_SESSION_TOKEN']
 set :aws_region,            ENV['AWS_REGION']
 ```
 
