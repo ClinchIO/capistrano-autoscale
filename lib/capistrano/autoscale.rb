@@ -29,7 +29,7 @@ def autoscale(groupnames, identifier_type, *args)
         host = host_by_identifier(instance, identifier_type)
         p "Autoscale group \"#{autoscale_group.auto_scaling_group_name}\" deploying to: #{host}"
         if index == 0
-          server(host, *args.first.merge(primary: true))
+          server(host, args.first.merge(primary: true))
         else
           server(host, *args)
         end
