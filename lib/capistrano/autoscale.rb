@@ -28,8 +28,11 @@ def autoscale(groupnames, identifier_type, *args)
       group_instances.each_with_index do |instance, index|
         host = host_by_identifier(instance, identifier_type)
         p "Autoscale group \"#{autoscale_group.auto_scaling_group_name}\" deploying to: #{host}"
-        args << {primary: true} if index == 0
-        server(host, *args)
+        if index == 0
+          server(host, *args.first.merge(primary: true))
+        else
+          server(host, *args)
+        end
       end
     end
   else
