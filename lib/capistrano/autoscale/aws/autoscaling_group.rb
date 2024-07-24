@@ -9,7 +9,7 @@ module Capistrano
         include Capistrano::DSL
 
         def autoscale_groups
-          @autoscale_groups ||= ::Aws::AutoScaling::Client.new(autoscaling_credentials).describe_auto_scaling_groups({auto_scaling_group_names: [autoscale_group_names].flatten}).auto_scaling_groups
+          ::Aws::AutoScaling::Client.new(autoscaling_credentials).describe_auto_scaling_groups({auto_scaling_group_names: [autoscale_group_names].flatten}).auto_scaling_groups
         end
 
         def autoscale_group_names
