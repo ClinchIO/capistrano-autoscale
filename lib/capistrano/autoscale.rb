@@ -29,10 +29,14 @@ def autoscale(groupnames, identifier_type, *args)
       instances += group_instances
     end
 
-    instances.each do |instance|
+    instances.each_with_index do |instance, index|
       host = host_by_identifier(instance, identifier_type)
-      p "Autoscale deploying to: #{host}"
-      server(host, *args)
+      p "[#{groupnames}] Autoscale deploying to: #{host}"
+      if index == 0
+        server(host, args.first.merge(primary: true))
+      else
+        server(host, *args)
+      end
     end
   else
     p "Error: No #{groupnames} autoscale group found."
